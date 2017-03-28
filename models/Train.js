@@ -11,7 +11,7 @@ Train.add({
 	name: { type: Types.Name, required: true, index: true },
 	nextStation: { type: Types.Relationship, ref: 'Station'},
 	capacity: { type: Types.Number, initial: 100, required: true },
-	atStation: { type: Boolean, label: 'Can access Keystone', index: true }
+	atStation: { type: Boolean, label: 'Can access Keystone', index: true },
 	passengers: { type: Types.Relationship, ref: 'Passenger', many: true}
 });
 
