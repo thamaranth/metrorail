@@ -8,16 +8,14 @@ var Types = keystone.Field.Types;
 var Station = new keystone.List('Station');
 
 Station.add({
-	name: { type: Types.Name, required: true, index: true },
-	email: { type: Types.Email, initial: true, required: true, index: true },
-	password: { type: Types.Password, initial: true, required: true },
-}, 'Permissions', {
-	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
+	location: { type: Types.Name, required: true, index: true },
+	passengers: { type: Types.Relationship, ref: 'Passenger' many: true },
+	previous: { type: Types.Relationship, ref: 'Station', required: true },
 });
 
 // Provide access to Keystone
-Station.schema.virtual('canAccessKeystone').get(function () {
-	return this.isAdmin;
+Station.schema.virtual('nextStationFor').get(function () {
+	return this.previous;
 });
 
 
